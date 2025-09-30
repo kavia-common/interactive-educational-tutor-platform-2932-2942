@@ -1,3 +1,66 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<div class="container-app">
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">EA</div>
+      <div>
+        <div style="line-height:1;">EduAssist</div>
+        <small style="color:#6b7280;">Interactive Tutor</small>
+      </div>
+    </div>
+    <nav style="display:flex; gap:8px;">
+      <a routerLink="/chat" routerLinkActive="active" class="btn ghost">Chat</a>
+      <a routerLink="/resources" routerLinkActive="active" class="btn ghost">Resources</a>
+      <a routerLink="/profile" routerLinkActive="active" class="btn ghost">Profile</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span class="badge">Student</span>
+      <button class="btn secondary" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- App Shell -->
+  <div class="app-shell">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="section-title">Navigation</div>
+      <ul class="nav-list">
+        <li><a class="nav-item" routerLink="/chat" routerLinkActive="active">💬 Sessions</a></li>
+        <li><a class="nav-item" routerLink="/resources" routerLinkActive="active">📚 Resources</a></li>
+        <li><a class="nav-item" routerLink="/profile" routerLinkActive="active">👤 Profile</a></li>
+      </ul>
+
+      <div class="section-title">Recent Sessions</div>
+      <div style="padding:8px 8px 16px;">
+        <div *ngFor="let s of sampleSessions" class="kv-pair">
+          <div style="font-weight:600;">{{ s.title }}</div>
+          <small style="color:#6b7280;">{{ s.updated | date:'short' }}</small>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <main class="main-panel">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="rightbar">
+      <div class="section-title">Context</div>
+      <div style="padding: 12px;">
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+          <span class="badge">Math</span>
+          <span class="badge">Physics</span>
+          <span class="badge">RAG</span>
+        </div>
+        <div style="font-weight:600;margin-bottom:6px;">History</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li *ngFor="let h of sampleHistory" style="padding:8px; border:1px solid rgba(17,24,39,0.06); border-radius:10px;">
+            <div style="font-size:13px;">{{ h.summary }}</div>
+            <small style="color:#6b7280;">{{ h.time | date:'shortTime' }}</small>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
 </div>
